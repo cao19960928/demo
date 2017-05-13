@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>appcan</title>
+    <style>
+        span{
+            display: inline-block;
+            width:80px;
+            height:20px;
+            background-color: pink;
+            margin-left: 20px;
+            color:white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+<script>
+    var arr = [
+        {
+            name:"zhao"
+        },
+        {
+            name:"qian"
+        },
+        {
+            name:"sun"
+        },
+        {
+            name:"li"
+        }
+    ]
+    var oDiv = document.getElementById("box");
+    for(var i = 0; i < arr.length; i ++){
+        var span = document.createElement("span");
+        var content = arr[i];
+        console.log(content);
+        span.innerHTML = content.name;
+        oDiv.appendChild(span);
+    }
+</script>
+</html>

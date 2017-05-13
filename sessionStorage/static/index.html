@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>主页</title>
+</head>
+<body>
+    
+    <div  style="background-color:red;">
+        <a href="a.html" >分页面</a>
+    </div>
+    <form >
+        <label for="username">姓名</label>
+        <input type="text" placeholder="请输入你的姓名">
+        <label for="password">密码</label>
+        <input type="text" placeholder="请输入你的密码" id="password" name="password">
+    </form>
+    <select name="" id="">
+        <option value="1">HTML</option>
+        <option value="2">javaScript</option>
+        <option value="3">CSS</option>
+    </select>
+    <input type="text" id="content">
+        
+    
+</body>
+<script>
+    var text = localStorage.getItem("text");
+    console.log(text);
+    var password = document.getElementById("password");
+    password.value = text;
+
+
+    var data = [
+        {
+            name:'wang'
+        },
+        {
+            name:'cao'
+        },
+        {
+            name:'li'
+        }
+    ];
+    var ul = document.createElement('ul');
+    for(var i = 0; i < data.length; i++){
+        var li = document.createElement('li');
+        li.innerHTML = data[i].name;
+        ul.appendChild(li);
+    };
+    document.querySelector("body").appendChild(ul);
+
+    // var textarea = document.createElement('textarea');
+    // ul.append(textarea);
+
+    var input = document.querySelector('#content');
+   var div = document.querySelector('a');
+   div.addEventListener('click',function(){
+       console.log('被点击了');
+       var content = input.value;
+       console.log(content);
+       localStorage.setItem("content",content);
+   });
+   var lS = localStorage.getItem("content");
+   console.log(lS);
+    if(lS != null && lS != undefined && lS != ''){
+        var content = lS;
+        console.log(content);
+       input.value = content + '1';
+    }
+</script>
+</html>

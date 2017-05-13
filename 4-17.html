@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="代理事件">
+    <meta name="discription" content="jquery代理事件的学习">
+    <title>delegat和live</title>
+</head>
+<body>
+    <div style="background-color:red">
+        <p>这是一个段落。</p>
+        <button>请点击这里</button>
+    </div>
+    <br>
+    <hr>
+    <button id="btn1">live</button>
+</body>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+    // delegate 是为当前元素子元素添加未来代理事件
+    $(document).ready(function(){
+        $("div").delegate("button","click",function(){
+            $("p").slideToggle();
+        });
+
+        $("#btn1").on("click",function(){
+            console.log("被点击了");
+        })
+    });
+    
+
+    var obj = {
+        foo:function(){
+            // return this === obj;
+            console.log(this);
+        }
+    }
+    console.log(obj.foo());
+    console.log((obj.foo)());
+    console.log((obj.foo = obj.foo)());
+    console.log((false || obj.foo)())
+
+    var foo = {
+        n: 1
+    };
+    var bar = foo;
+    foo.x = foo = {
+        n: 2
+    };
+    console.log(foo.x);
+
+    function a() {
+        for (var i = 0; i < 3; i++) {
+            (function(j){
+                    setTimeout(function timer() {
+                    console.log(j);
+                }, 1000);
+            })(i);
+        }
+    }
+    a();
+
+    // this 在匿名函数的执行环境具有全局性
+    var name = "The Window";　　
+    var object = {　　　　
+        name: "My Object",
+        　　　　getNameFunc: function() {　　　　　　
+            return function() {
+                console.log(window === this);　　　　　　　　
+                return this.name;　　　　　　
+            };　　　　
+        }　　
+    };　　
+    console.log(object.getNameFunc()()); // "The Window"
+
+
+    var age = 18;
+    var o = {
+        age : 20,
+        getAgeFunc:function(){
+            console.log('123');
+            return function b(){
+                console.log(this.age);
+            }.bind(this);
+        }
+    }
+    var c = o.getAgeFunc();
+    c();
+
+    var i = 0;
+    function add() {
+        function q() {
+            return ++i;
+        }
+        return q;
+    }
+    var f = add();
+    console.log(f());
+    console.log(f());
+    console.log(f());
+
+    var a = {a:10};
+    var b = Object.create(a);
+    console.log(b.a);
+    console.log(b.hasOwnProperty("a"));
+    var c = Object.create(null);
+    console.log(c.hasOwnProperty)
+</script>
+</html>

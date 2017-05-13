@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>复选框的批量删除</title>
+    <style>
+        
+        /*input[type=checkbox], input[type=radio] {
+            -webkit-appearance: none;
+            background-color: transparent;
+            outline: 0 !important;
+            border: 0;
+            font-size: 1em !important;
+        }
+       
+        input[type=checkbox]:before, input[type=radio]:before {
+            display: inline-block;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: thin;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: rgb(212,212,212);
+        }
+         input[type=checkbox]:checked:before, input[type=radio]:checked:before {
+            color: rgb(210,10,35);
+        }
+        input[type=checkbox]:before {
+            content: "\f096";
+        }
+        input[type=checkbox]:checked:before {
+            content: "\f14a";
+        }*/
+        /*input[type=checkbox] { visibility: hidden; }
+        .checked { width: 40px; height: 10px; background: #555; margin: 20px 80px; position: relative; border-radius: 3px; }
+        .checked label { display: block; width: 16px; height: 16px; border-radius: 50%;   -webkit-transition: all .5s ease; -moz-transition: all .5s ease; -o-transition: all .5s ease; -ms-transition: all .5s ease; transition: all .5s ease; cursor: pointer; position: absolute; top: -3px; left: -3px;   background: #ccc; }
+        .checked input[type=checkbox]:checked + label { left: 27px; }*/
+    </style>
+</head>
+<body>
+    <div class="checked">
+        <input type="checkbox" name="" id="checkone" >
+        <label for="checkone">one</label>
+    </div>
+    <div class="checked">
+        <input type="checkbox" name="" id="checktwo" >
+        <label for="checktwo">two</label>
+    </div>
+    <div class="checked">
+        <input type="checkbox" name="" id="checkthree" checked>
+        <label for="checkthree">three</label>
+    </div>
+    <div class="checked">
+        <input type="checkbox" name="" id="checkfour" checked>
+        <label for="checkfour">four</label>
+    </div>
+    <div class="checked">
+        <input type="checkbox" name="" id="checkfive" >
+        <label for="checkfive">five</label>
+    </div>
+    <button>点击删除选中内容</button>
+    <button>点击增加</button>
+</body>
+<script>
+    window.onload = function(e){
+        // var checkboxs = document.querySelectorAll("input");
+        var btnRemove = document.querySelectorAll("button")[0];
+        var btnAdd = document.querySelectorAll("button")[1];
+        btnRemove.onclick = function(){
+            console.log("删除按钮被点击了");
+            var checkboxs = document.querySelectorAll("input");
+            console.log(checkboxs);
+            for(var i = 0;i<checkboxs.length;i ++){
+                (function(i){
+                    if(checkboxs[i].checked == true){
+                        checkboxs[i].parentElement.remove();
+                    }
+                }(i))
+            }
+        }
+        btnAdd.onclick = function(){
+            var input = document.createElement("input");
+            input.type = "checkbox";
+        }
+    }
+</script>
+</html>

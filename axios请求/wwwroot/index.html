@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>axios请求</title>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    var oDiv = document.getElementById("box");
+    // axios.get("/user")
+    // .then(res=>{
+    //     console.log(res);
+    //     console.log(res.data.name);
+    //     console.log(res.data.age);
+    // })
+    // .catch(error=>{
+    //     console.log(error);
+    // });
+    // var form = new FormData();
+    // form.append("name","jack");
+    // form.append("age",18);
+    // form = JSON.stringify(form);
+    axios.post("/regist",{
+            name:"jack",
+            age:18
+    })
+    .then(res=>{
+        console.log(res);
+        oDiv.innerHTML = "<h1>"+ res.data.name + "</h1>"
+    })
+    .catch(error=>{
+        console.log(error);
+    })
+
+    function getUser1(){
+        return axios.get("/user?id=zhangsan&age=18")
+    };
+    function getUser2(){
+        return axios.get("/user")
+    };
+    axios.all([getUser1(),getUser2()])
+    .then(axios.spread(function(res1,res2){
+        console.log(res1);
+        console.log(res2);
+    }));
+
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+            console.log(xhr.responseText);
+        }
+    }
+    xhr.open("post","/login");
+    xhr.setRequestHeader("content-Type","application/x-www-form-urlencoded")
+    xhr.send("name=lisi&age=99");
+
+    axios.get("/password",{
+        params:{
+            password:666
+        }
+    })
+    .then(res=>{
+        console.log(res);
+        var b = document.createElement("b");
+        b.innerHTML = res.data.password;
+        oDiv.append(b);
+    })
+    .catch(error=>{
+        console.log(error);
+    })
+</script>
+</html>
+

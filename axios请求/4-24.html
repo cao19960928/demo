@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板引入子模板</title>
+</head>
+<body>
+<script src="template.js"></script>
+<script id="web" type="text/html">
+    <a href="{{url}}">{{name}}</a>
+</script>
+<script id="book" type="text/html">
+    <img src="{{url}}" alt="">
+    <br>
+    <div>{{name}}</div>
+</script>
+<script id="recommend" type="text/html">
+    {{if items.length == 0}}
+        <h1>抱歉，未找到相关内容</h1>
+    {{else}}
+        <h1>{{title}}：{{items.length}}个</h1>
+        {{each items as item}}
+            {{if item.type == 'web'}}
+                {{include 'web' item}}
+            {{else}}
+                {{include 'book' item}}
+            {{/if}}
+        {{/each}}
+    {{/if}}
+</script>
+<script>
+    var data = 
+    {
+        title:"推荐的书籍和网站",
+        items:
+        [
+            {
+                type:'web',
+                name:'github',
+                url:'https://github.com'
+            },
+            {
+                type:'book',
+                name:'黄金时代',
+                url:'http://img2.37wanimg.com/2014/0818/14083329155825.small.png'
+            },
+            {
+                type:'web',
+                name:'google',
+                url:'https://www.google.com'
+            },
+            {
+                type:'book',
+                name:'围城',
+                url:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1484047692883&di=edf1860dc373863422ccdfecd43c1057&imgtype=0&src=http%3A%2F%2Fec4.images-amazon.com%2Fimages%2FI%2F415ZJgXDNEL._SL500_AA300_.jpg'
+            },
+            {
+                type:'web',
+                name:'知乎',
+                url:'https://www.zhihu.com'
+            },
+            {
+                type:'book',
+                name:'汤姆索亚历险记',
+                url:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1484047764487&di=e6853f746fe6ba15b34266592b8501ac&imgtype=0&src=http%3A%2F%2Fi1.w.hjfile.cn%2Fdoc%2F201111%2Ftom%2520sawyer11530.jpg'
+            }
+        ]
+    }
+    var result = template('recommend',data);
+    document.body.innerHTML = result;
+</script>
+</body>
+</html>

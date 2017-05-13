@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>666</title>
+    <style>
+        #section{
+            height:300px;
+            background-color:red;
+            position:relative;
+            left:100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        {{a}}  
+        <section 
+        id= "section"
+        style=""
+        ></section>
+    </div>
+</body>
+<script src="vue.js"></script>
+<script>
+    function test(a){
+        a = a || 1;
+        for(var i = 0; i <=5; i++){
+            if(a === i + 1){
+                a = i;
+                break;
+            }
+            if(a == i){
+                return;
+            }
+        }
+        return a;
+    }
+    function testA(){
+        var a = test(0); // a=0
+        var b = test('2'); // 
+        var c = test(6); // 5
+        console.log('a='+a+',b='+b+',c='+c);
+    }
+    function testB(){
+        var temp = null,list=[1,2,3,4,5];
+        for(var i = 0; i < list.length; i ++){
+            temp = list[i];
+            setTimeout(function(){
+                console.log('temp' + temp);
+            },100);
+        }
+    }
+    testA();
+    testB();
+    // var factorial = function factorial(i, a) {
+    //     a = a || 1;
+    //     alert(a);
+    //     if (i < 2) {
+    //     return a;
+    //     }
+    //     return factorial(i - 1, a * i);
+    // }
+    // document.write(factorial(4,0) + '<br/>');
+</script>
+<script>
+    var data1 = {a:10};
+    var vm = new Vue({
+        el:"#app",
+        data:data1
+    });
+    // vm.a = 100;
+    console.log(vm.a);
+    // 不能再对象外部给对象添加data里面没有声明的属性和属性值 因为vue是通过get set方法来实现数据双向绑定的
+    // 当属性在data里面声明的时候 vue通过object.defineProperty给属性添加上get和set方法 当属性的值更改时  
+    // 通过set方法来更改界面上所显示的值 
+    // data1.b = 100;
+</script>
+<script>
+    var start = new Date();
+    // setInterval(function(){
+    //     console.log(new Date() - start,2);
+    // },500)
+    // while (new Date() - start < 2800){
+    //     console.log('小于2000');
+    // }
+    // var n = 0;
+    // while(n < 20){
+    //     console.log(n);
+    //     n ++;
+    // }
+    
+    // do {
+    //     console.log('do首先循环在判断条件');
+    // }while(!n){
+    //    console.log(n);
+    // }
+</script>
+<script>
+    var section = document.querySelector('section');
+    //  console.log(section.currentStyle.left);
+    console.log(getComputedStyle(section,false)['left']);
+</script>
+
+<script>
+    var a = 2;
+    var func = (function(){
+        var a = 3;
+        return function(){
+            a ++;
+            alert(a);
+        }
+    })();
+    func();
+    func();
+</script>
+</html>

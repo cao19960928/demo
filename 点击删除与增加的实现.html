@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>删除与增加</title>
+    <style>
+        ul{
+            background-color:lightgray;
+            list-style-type: none;
+        }
+        ul li{
+            background-color:pink;
+            margin:20px;
+            color:white;
+            text-align: center;
+            position:relative;
+        }
+        span{
+            position:absolute;
+            top:0;
+            right:0;
+        }
+    </style>
+</head>
+<body>
+    <ul id="list"></ul>
+    <button>点击删除</button>
+    <br>
+    <br>
+    <button>点击取消</button>
+    <br>
+    <br>
+    <button>点击增加</button>
+</body>
+<script>
+    var ul = document.getElementById("list");
+    var data = [1,2,3,4,5];
+    var j = 5;
+    for(var i = 0;i<data.length;i ++){
+        var li = document.createElement("li");
+        li.innerHTML = data[i];
+        ul.appendChild(li);
+    }
+    window.onload = function(){
+        var btnRemove = document.getElementsByTagName("button")[0];
+    btnRemove.addEventListener("click",function(){
+        console.log("按钮被点击了");
+        var li = document.getElementsByTagName("li");
+        for(var i = 0; i < li.length; i ++){
+            var span = document.createElement("span");
+            span.style.backgroundColor = "red";
+            span.style.display = "inline-block";
+            span.style.width = "20px";
+            span.innerHTML = "<b>-</b>"
+            var append = li[i];
+            // console.log(append);
+            append.append(span);
+        }
+        var spans = document.getElementsByTagName("span");
+        // console.log(spans);
+        for(var i = 0; i< spans.length;i++){
+            console.log(spans);
+            (function(i){
+                spans[i].addEventListener('click',function(e){
+                    console.log(i);
+                    console.log(spans[i]);
+                    e.currentTarget.parentElement.remove();
+                })
+            }(i))
+
+        }
+    })
+        var btnCancel = document.getElementsByTagName('button')[1];
+        btnCancel.addEventListener("click",function(){
+            console.log("取消按钮被点击了");
+            var spans = document.querySelectorAll("span");
+            for(var i = 0; i< spans.length;i ++){
+                var span = spans[i];
+                console.log(span);
+                span.remove();
+            }
+        })
+        var btnAdd = document.getElementsByTagName("button")[2];
+        btnAdd.addEventListener("click",function(){
+            j ++;
+            console.log("添加按钮被点击了");
+            var li = document.createElement("li");
+            li.innerHTML = j;
+            ul.appendChild(li);
+        })
+    } 
+</script>
+</html>
